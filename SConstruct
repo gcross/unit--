@@ -34,5 +34,20 @@ Export('env idir_prefix idir_lib idir_bin idir_inc idir_data')
 env.Install(idir_lib, unitmm)
 env.Install(idir_inc, ['include/unit--.h'])
 env.Alias('install', idir_prefix)
+
+#@+at
+# Testing:
+#@-at
+#@@c
+test = env.Program('testing/test',[
+    'testing/fake1.cpp',
+    'testing/fake2.cpp',
+    'testing/main.cpp',
+    'testing/template.cpp',
+    'testing/unit--.selftest.cpp',
+    'testing/utility.cpp',
+    unitmm,
+])
+env.Alias('test',test)
 #@-node:gcross.20090221223144.2:@thin SConstruct
 #@-leo
