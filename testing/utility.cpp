@@ -74,10 +74,6 @@ void getNumber(const std::string& message, unsigned& begin, unsigned& end)
 // test if equalValueInfo give correct hint about failure
 testCase(EqualValueCase, UtilitySuite)
 {
-    {
-        unit_minus::AssertionInfo info(unit_minus::equalValue(1 + 1, 2));
-        assertTrue(info.successful());
-    }
 
     {
         const unsigned expected = 1;

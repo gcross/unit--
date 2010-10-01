@@ -108,22 +108,43 @@ namespace unit_minus {
     //@nonl
     //@-node:gcross.20090119092241.32:struct CheckerGuard
     //@+node:gcross.20090119092241.33:checking functions
-
-    template <typename T1, typename T2>
-    inline bool equalValue(const T1& expected, const T2& actual)
-    {
-        return expected == actual;
-    }
+    //@+node:gcross.20101001160513.1303:equal value
     template <typename T1, typename T2>
     inline AssertionInfo equalValueInfo(const T1& expected, const T2& actual)
     {
-        if (equalValue(expected, actual)) return AssertionInfo(true);
+        if (expected == actual) return AssertionInfo(true);
 
         std::ostringstream oo;
         oo << "expected <" << expected << ">, but was <" << actual << ">";
         return AssertionInfo(false, oo.str());
     }
+    //@nonl
+    //@-node:gcross.20101001160513.1303:equal value
+    //@+node:gcross.20101001160513.1306:greater or equal value
+    template <typename T1, typename T2>
+    inline AssertionInfo greaterOrEqualValueInfo(const T1& x, std::string x_name, const T2& y, std::string y_name)
+    {
+        if (x >= y) return AssertionInfo(true);
 
+        std::ostringstream oo;
+        oo << "have " << x_name << " <" << x << "> < " << y_name << " <" << y << ">";
+        return AssertionInfo(false, oo.str());
+    }
+    //@nonl
+    //@-node:gcross.20101001160513.1306:greater or equal value
+    //@+node:gcross.20101001160513.1308:less or equal value
+    template <typename T1, typename T2>
+    inline AssertionInfo lessOrEqualValueInfo(const T1& x, std::string x_name, const T2& y, std::string y_name)
+    {
+        if (x <= y) return AssertionInfo(true);
+
+        std::ostringstream oo;
+        oo << "have " << x_name << " <" << x << "> < " << y_name << " <" << y << ">";
+        return AssertionInfo(false, oo.str());
+    }
+    //@nonl
+    //@-node:gcross.20101001160513.1308:less or equal value
+    //@+node:gcross.20101001160513.1304:close value
     template <typename T1, typename T2, typename T3>
     inline bool closeValue(const T1& expected, const T2& actual, const T3& precision)
     {
@@ -139,6 +160,7 @@ namespace unit_minus {
         oo << "expected <" << expected << ">, but was <" << actual << ">, not close enough with precision <" << precision << ">";
         return AssertionInfo(false, oo.str());
     }
+    //@-node:gcross.20101001160513.1304:close value
     //@-node:gcross.20090119092241.33:checking functions
     //@-node:gcross.20090119092241.29:Assertions
     //@+node:gcross.20090418183921.7:Runners
@@ -407,6 +429,7 @@ testCasePrefix(thisCase, upperSuite, added_)
 //@nonl
 //@-node:gcross.20090119092241.37:test case macros
 //@+node:gcross.20090119092241.38:assertion macros
+//@+node:gcross.20101001160513.1300:assertTrue
 // test assertion
 // param: expression to test
 // true for pass, false for failure
@@ -417,16 +440,43 @@ testCasePrefix(thisCase, upperSuite, added_)
     opt_info.rawMessage("Assertion failed: <" #opt_expression ">");           \
     unit_minus::AssertionChecker::get().check(opt_info);                      \
 }
-
+//@-node:gcross.20101001160513.1300:assertTrue
+//@+node:gcross.20101001160513.1301:assertEqual
 // test assertion
 // param: values whose equality is to be tested
-#define assertEqual(A,B)                                            \
+#define assertEqual(A,B)                                                      \
 {                                                                             \
     unit_minus::CheckerGuard opt_tempGard(__FILE__, __LINE__);                \
     unit_minus::AssertionInfo opt_info = unit_minus::equalValueInfo(A,B);     \
     unit_minus::AssertionChecker::get().check(opt_info);                      \
 }
+//@nonl
+//@-node:gcross.20101001160513.1301:assertEqual
+//@+node:gcross.20101001160513.1310:assertGreaterOrEqual
+// test assertion
+// param: values which are to be compared
+#define assertGreaterOrEqual(A,B)                                                  \
+{                                                                                  \
+    unit_minus::CheckerGuard opt_tempGard(__FILE__, __LINE__);                     \
+    unit_minus::AssertionInfo opt_info = unit_minus::greaterOrEqualValueInfo(A, #A ,B, #B ); \
+    unit_minus::AssertionChecker::get().check(opt_info);                           \
+}
 
+#define assertGE(A,B) assertGreaterOrEqual(A,B)
+//@-node:gcross.20101001160513.1310:assertGreaterOrEqual
+//@+node:gcross.20101001160513.1312:assertLessOrEqual
+// test assertion
+// param: values whose equality is to be tested
+#define assertLessOrEqual(A,B)                                                  \
+{                                                                               \
+    unit_minus::CheckerGuard opt_tempGard(__FILE__, __LINE__);                  \
+    unit_minus::AssertionInfo opt_info = unit_minus::lessOrEqualValueInfo(A, #A, B, #B ); \
+    unit_minus::AssertionChecker::get().check(opt_info);                        \
+}
+
+#define assertLE(A,B) assertLessOrEqual(A,B)
+//@-node:gcross.20101001160513.1312:assertLessOrEqual
+//@+node:gcross.20101001160513.1302:assertNoArrive
 // test assertion
 // assume failure when executed
 // param: error message
@@ -438,6 +488,7 @@ testCasePrefix(thisCase, upperSuite, added_)
     unit_minus::AssertionChecker::get().check(opt_info);                      \
 }
 //@nonl
+//@-node:gcross.20101001160513.1302:assertNoArrive
 //@-node:gcross.20090119092241.38:assertion macros
 //@+node:gcross.20090119092241.40:default main
 #define useDefaultMain int main(int argc, char* argv[]) { unit_minus::defaultMain(argc,argv); }
