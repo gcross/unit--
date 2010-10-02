@@ -19,6 +19,7 @@ Help(opts.GenerateHelpText(env))
 #@-at
 #@@c
 unitmm = env.Library(target = 'lib/unit--', source = ['src/unit--.cc'], CPPPATH='include')
+Default(unitmm)
 
 #@+at
 # Perform installation:
