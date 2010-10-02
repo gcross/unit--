@@ -146,18 +146,15 @@ namespace unit_minus {
     //@-node:gcross.20101001160513.1308:less or equal value
     //@+node:gcross.20101001160513.1304:close value
     template <typename T1, typename T2, typename T3>
-    inline bool closeValue(const T1& expected, const T2& actual, const T3& precision)
-    {
-        return !(expected + precision < actual)
-            && !(actual + precision < expected);
-    }
-    template <typename T1, typename T2, typename T3>
     inline AssertionInfo closeValueInfo(const T1& expected, const T2& actual, const T3& precision)
     {
-        if (closeValue(expected, actual, precision)) return AssertionInfo(true);
+        if (
+            (expected + precision >= actual  )
+         && (actual   + precision >= expected)
+        ) return AssertionInfo(true);
 
         std::ostringstream oo;
-        oo << "expected <" << expected << ">, but was <" << actual << ">, not close enough with precision <" << precision << ">";
+        oo << "expected <" << expected << ">, but was <" << actual << ">, which is not close enough with precision <" << precision << ">";
         return AssertionInfo(false, oo.str());
     }
     //@-node:gcross.20101001160513.1304:close value
@@ -452,6 +449,17 @@ testCasePrefix(thisCase, upperSuite, added_)
 }
 //@nonl
 //@-node:gcross.20101001160513.1301:assertEqual
+//@+node:gcross.20101001221615.1310:assertAlmostEqual
+// test assertion
+// param: values whose equality is to be tested
+#define assertAlmostEqual(A,B,C)                                                      \
+{                                                                             \
+    unit_minus::CheckerGuard opt_tempGard(__FILE__, __LINE__);                \
+    unit_minus::AssertionInfo opt_info = unit_minus::closeValueInfo(A,B,C);     \
+    unit_minus::AssertionChecker::get().check(opt_info);                      \
+}
+//@nonl
+//@-node:gcross.20101001221615.1310:assertAlmostEqual
 //@+node:gcross.20101001160513.1310:assertGreaterOrEqual
 // test assertion
 // param: values which are to be compared

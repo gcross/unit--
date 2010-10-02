@@ -99,10 +99,6 @@ testCase(EqualValueCase, UtilitySuite)
 // test if closeValueInfo give correct hint about failure
 testCase(CloseValueCase, UtilitySuite)
 {
-    {
-        unit_minus::AssertionInfo info(unit_minus::closeValue(2.0, 2.0, 0.01));
-        assertTrue(info.successful());
-    }
 
     {
         const float expected = 0.0f + 3.5f - 1.9f;

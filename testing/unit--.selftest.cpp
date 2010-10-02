@@ -88,10 +88,6 @@ testCase(FloatingPoint, IllustrationSuite)
     float errorLimit = 0.001f;
     float value = 1.03f + 0.204f;
 
-    // test if two float values were close enough to each other
-    assertTrue(closeValue(expectedValue, value, errorLimit));
-    assertTrue(closeValue(expectedValue, value, 0.5));
-
     // if some specific information is needed when an assertion failed,
     // unit_minus::closeValueInfo() may help
     // NOTE: closeValueInfo() uses operator << to convert parameters to string description
