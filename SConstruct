@@ -19,7 +19,8 @@ Help(opts.GenerateHelpText(env))
 #@-at
 #@@c
 unitmm = env.Library(target = 'lib/unit--', source = ['src/unit--.cpp'], CPPPATH='include')
-Default(unitmm)
+unitmm_main = env.Library(target = 'lib/unit--main', source = ['src/unit--main.cpp'], CPPPATH='include')
+Default(unitmm,unitmm_main)
 
 #@+at
 # Perform installation:
@@ -43,11 +44,11 @@ env.Alias('install', idir_prefix)
 test = env.Program('tests/test',[
     'tests/fake1.cpp',
     'tests/fake2.cpp',
-    'tests/main.cpp',
     'tests/template.cpp',
     'tests/unit--.selftest.cpp',
     'tests/utility.cpp',
     unitmm,
+    unitmm_main,
 ])
 env.Alias('test',test)
 #@-node:gcross.20090221223144.2:@thin SConstruct
