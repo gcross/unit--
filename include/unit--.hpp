@@ -380,7 +380,7 @@ namespace unit_minus {
     int listCases();
     std::string getFormat(const std::string& style);
     int runTest(const std::string& errorFormat);
-    int defaultMain(int argc, char* argv[]);
+    int main(int argc, char* argv[]);
     //@nonl
     //@-node:gcross.20090119092241.34:miscelleneous
     //@-others
@@ -499,7 +499,7 @@ testCasePrefix(thisCase, upperSuite, added_)
 //@-node:gcross.20101001160513.1302:assertNoArrive
 //@-node:gcross.20090119092241.38:assertion macros
 //@+node:gcross.20090119092241.40:default main
-#define useDefaultMain int main(int argc, char* argv[]) { unit_minus::defaultMain(argc,argv); }
+#define useDefaultMain int main(int argc, char* argv[]) { unit_minus::main(argc,argv); }
 //@-node:gcross.20090119092241.40:default main
 //@-node:gcross.20090119092241.35:Macros
 //@-others

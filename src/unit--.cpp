@@ -27,6 +27,8 @@
 
 namespace unit_minus {
 
+using namespace std;
+
 //@+others
 //@+node:gcross.20090119092241.6:Runners
 //@+node:gcross.20090119092241.7:class EnhancedRunner
@@ -36,7 +38,6 @@ namespace unit_minus {
 //@+node:gcross.20101003152339.1348:check
 void EnhancedRunner::check(CaseBase& aCase)
 {
-    using namespace std;
     try {
         cout << string(INDENT_SIZE * m_indent, ' ');
         cout << "\033[1;33m" << aCase.caption() << "... \033[0m" << flush;
@@ -50,8 +51,8 @@ void EnhancedRunner::check(CaseBase& aCase)
         return;
     }
     // some kind of unexpected exception
-    catch (std::exception& e) {
-        std::ostringstream mess;
+    catch (exception& e) {
+        ostringstream mess;
         mess << "unexpected exception with description:\n";
         mess << e.what();
         FailureInfo info(aCase.file(), aCase.line(), mess.str());
@@ -59,7 +60,7 @@ void EnhancedRunner::check(CaseBase& aCase)
         return;
     }
     catch (...) {
-        std::ostringstream mess;
+        ostringstream mess;
         mess << "unexpected unknown exception";
         FailureInfo info(aCase.file(), aCase.line(), mess.str());
         fail(aCase, info);
@@ -70,7 +71,6 @@ void EnhancedRunner::check(CaseBase& aCase)
 //@-node:gcross.20101003152339.1348:check
 //@+node:gcross.20101003152339.1346:enter
 void EnhancedRunner::enter(SuiteBase& suite) {
-    using namespace std;
     cout << string(INDENT_SIZE * m_indent, ' ');
     cout << "\033[43m" << suite.caption() << ":\033[0m" << endl;
     ++m_indent;
@@ -78,9 +78,8 @@ void EnhancedRunner::enter(SuiteBase& suite) {
 //@nonl
 //@-node:gcross.20101003152339.1346:enter
 //@+node:gcross.20101003152339.1350:errorMessage
-std::string EnhancedRunner::errorMessage(FailureInfo& info) const
+string EnhancedRunner::errorMessage(FailureInfo& info) const
 {
-    using namespace std;
     ostringstream oo;
     for (string::size_type i = 0; i < m_errorFormat.length(); ++i) {
         if ('_' != m_errorFormat[i]) {
@@ -109,7 +108,6 @@ void EnhancedRunner::exit(SuiteBase&) {
 // a test case failed
 void EnhancedRunner::fail(CaseBase& aCase, FailureInfo& info)
 {
-    using namespace std;
     cout << "\033[1;31m FAIL :-( \033[0m" << endl;
     cout << string(INDENT_SIZE * (m_indent+1), ' ');
     cout << "\033[1;31m" << errorMessage(info) << "\033[0m" << endl;
@@ -129,7 +127,6 @@ bool EnhancedRunner::ok() const
 //@+node:gcross.20101003152339.1351:pass
 void EnhancedRunner::pass(CaseBase&)
 {
-    using namespace std;
     ++m_totalCount;
     cout << "\033[1;32m PASS :-) \033[0m" << endl;
 }
@@ -138,7 +135,6 @@ void EnhancedRunner::pass(CaseBase&)
 //@+node:gcross.20101003152339.1353:printSummary
 void EnhancedRunner::printSummary() const
 {
-    using namespace std;
     cout << "\n";
     if (0 == m_failureCount) {
         cout << "OK" << endl;
@@ -157,7 +153,7 @@ void EnhancedRunner::printSummary() const
 //@-node:gcross.20101003152339.1353:printSummary
 //@-node:gcross.20090119092241.7:class EnhancedRunner
 //@+node:gcross.20090119092241.8:class StdRunner
-// test all cases, and output error message to std::cout
+// test all cases, and output error message to cout
 class StdRunner: public unit_minus::Runner {
 private:
     typedef StdRunner Self;
@@ -184,9 +180,9 @@ private:
     };
 
     Checker m_checker;
-    std::string m_errorFormat;
+    string m_errorFormat;
 public:
-    StdRunner(const std::string& errorFormat)
+    StdRunner(const string& errorFormat)
         : m_failureCount(0), m_totalCount(0)
     {
         unit_minus::AssertionChecker::reg(m_checker);
@@ -209,8 +205,8 @@ public:
             return;
         }
         // some kind of unexpected exception
-        catch (std::exception& e) {
-            std::ostringstream mess;
+        catch (exception& e) {
+            ostringstream mess;
             mess << "unexpected exception with description:\n";
             mess << e.what();
             FailureInfo info(aCase.file(), aCase.line(), mess.str());
@@ -218,7 +214,7 @@ public:
             return;
         }
         catch (...) {
-            std::ostringstream mess;
+            ostringstream mess;
             mess << "unexpected unknown exception";
             FailureInfo info(aCase.file(), aCase.line(), mess.str());
             fail(aCase, info);
@@ -229,7 +225,6 @@ public:
     // a test case failed
     virtual void fail(CaseBase& aCase, FailureInfo& info)
     {
-        using namespace std;
         cout << "X\n";
         cout << aCase.caption() << "\n";
         cout << errorMessage(info) << "\n";
@@ -237,9 +232,8 @@ public:
         ++m_failureCount;
         ++m_totalCount;
     }
-    std::string errorMessage(FailureInfo& info) const
+    string errorMessage(FailureInfo& info) const
     {
-        using namespace std;
         ostringstream oo;
         for (string::size_type i = 0; i < m_errorFormat.length(); ++i) {
             if ('_' != m_errorFormat[i]) {
@@ -260,7 +254,6 @@ public:
     // a test case passed
     virtual void pass(CaseBase&)
     {
-        using namespace std;
         ++m_totalCount;
         cout << "." << flush;
     }
@@ -272,7 +265,6 @@ public:
     // print summery of whole test
     void printSummary() const
     {
-        using namespace std;
         cout << "\n";
         if (0 == m_failureCount) {
             cout << "OK" << endl;
@@ -301,7 +293,6 @@ public:
     ListBuilder(): m_indent(0) {}
     virtual void enter(SuiteBase& suite)
     {
-        using namespace std;
         cout << string(INDENT_SIZE * m_indent, ' ');
         cout << suite.caption() << endl;
         ++m_indent;
@@ -313,7 +304,6 @@ public:
 
     virtual void check(CaseBase& ca)
     {
-        using namespace std;
         cout << string(INDENT_SIZE * m_indent, ' ');
         cout << ca.caption() << "\n";
     }
@@ -326,11 +316,11 @@ public:
 void SuiteBase::run(Runner& log)
 {
     log.enter(*this);
-    std::vector<TestBase*> tests_to_run;
+    vector<TestBase*> tests_to_run;
     for (TestBase* p = tests(); p != 0; p = p->nextPointer()) {
         tests_to_run.push_back(p);
     }
-    for (std::vector<TestBase*>::reverse_iterator pp = tests_to_run.rbegin(); pp != tests_to_run.rend(); ++pp) {
+    for (vector<TestBase*>::reverse_iterator pp = tests_to_run.rbegin(); pp != tests_to_run.rend(); ++pp) {
         (*pp)->run(log);
     }
     log.exit(*this);
@@ -339,31 +329,9 @@ void SuiteBase::run(Runner& log)
 //@-node:gcross.20090418183921.18:class SuiteBase
 //@-node:gcross.20090418183921.17:Suites
 //@+node:gcross.20101003152339.1344:Functions
-//@+node:gcross.20090119092241.15:defaultMain
-int defaultMain(int argc, char* argv[])
-{
-    using namespace unit_minus;
-    using namespace std;
-
-    if (argc < 2) {
-        return runTest(getFormat("gnu"));
-    }
-
-    if (argc > 2 || string(argv[1]) == "-h" || string(argv[1]) == "--help") {
-        return printHelp(argv[0]);
-    }
-
-    if (string(argv[1]) == "-l" || string(argv[1]) == "--list") {
-        return listCases();
-    }
-
-    return runTest(getFormat(argv[1]));
-}
-//@-node:gcross.20090119092241.15:defaultMain
 //@+node:gcross.20090119092241.13:getFormat
-std::string getFormat(const std::string& style)
+string getFormat(const string& style)
 {
-    using namespace std;
     if ("gnu" == style) return "_f:_l: _m";
     if ("vc"  == style) return "_f(_l) : error: _m";
 
@@ -380,17 +348,33 @@ std::string getFormat(const std::string& style)
 //@+node:gcross.20090119092241.12:listCases
 int listCases()
 {
-    using namespace unit_minus;
     ListBuilder listBuilder;
     suiteInstance<Root>().run(listBuilder);
     return 0;
 }
 //@nonl
 //@-node:gcross.20090119092241.12:listCases
-//@+node:gcross.20090119092241.11:printHelp
-int printHelp(const std::string& execFile)
+//@+node:gcross.20090119092241.15:main
+int main(int argc, char* argv[])
 {
-    using namespace std;
+    if (argc < 2) {
+        return runTest(getFormat("gnu"));
+    }
+
+    if (argc > 2 || string(argv[1]) == "-h" || string(argv[1]) == "--help") {
+        return printHelp(argv[0]);
+    }
+
+    if (string(argv[1]) == "-l" || string(argv[1]) == "--list") {
+        return listCases();
+    }
+
+    return runTest(getFormat(argv[1]));
+}
+//@-node:gcross.20090119092241.15:main
+//@+node:gcross.20090119092241.11:printHelp
+int printHelp(const string& execFile)
+{
     cout
         << "usage:\n"
         << execFile << " [ <style> | -h | -l ]\n"
@@ -414,11 +398,8 @@ int printHelp(const std::string& execFile)
 //@nonl
 //@-node:gcross.20090119092241.11:printHelp
 //@+node:gcross.20090119092241.14:runTest
-int runTest(const std::string& errorFormat)
+int runTest(const string& errorFormat)
 {
-    using namespace unit_minus;
-    using namespace std;
-
     EnhancedRunner runner(errorFormat);
     time_t t0 = time(0);
     suiteInstance<Root>().run(runner);
