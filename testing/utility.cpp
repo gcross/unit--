@@ -19,7 +19,7 @@
 #include <string>
 #include <sstream>
 #include <stdexcept>
-#include "../include/unit--.h"
+#include "../include/unit--.hpp"
 
 testSuite(UtilitySuite)
 

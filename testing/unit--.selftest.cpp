@@ -20,7 +20,7 @@
 // the test cases listed below are also basic tests for unit-- itself
 
 // first of all, include the header of unit--
-#include "../include/unit--.h"
+#include "../include/unit--.hpp"
 
 // suite #1
 // for convenience, define a test suite

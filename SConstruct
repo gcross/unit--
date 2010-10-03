@@ -18,7 +18,7 @@ Help(opts.GenerateHelpText(env))
 # Build the program:
 #@-at
 #@@c
-unitmm = env.Library(target = 'lib/unit--', source = ['src/unit--.cc'], CPPPATH='include')
+unitmm = env.Library(target = 'lib/unit--', source = ['src/unit--.cpp'], CPPPATH='include')
 Default(unitmm)
 
 #@+at
@@ -33,7 +33,7 @@ idir_data   = '$PREFIX/share'
 Export('env idir_prefix idir_lib idir_bin idir_inc idir_data')
 
 env.Install(idir_lib, unitmm)
-env.Install(idir_inc, ['include/unit--.h'])
+env.Install(idir_inc, ['include/unit--.hpp'])
 env.Alias('install', idir_prefix)
 
 #@+at

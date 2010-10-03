@@ -19,7 +19,7 @@
 #include <vector>
 #include <numeric>
 #include <algorithm>
-#include "../include/unit--.h"
+#include "../include/unit--.hpp"
 
 testSuite(TemplateSuite)
 

@@ -1,5 +1,5 @@
 //@+leo-ver=4-thin
-//@+node:gcross.20090119092241.16:@thin unit--.h
+//@+node:gcross.20090119092241.16:@thin unit--.hpp
 //@@language C++
 // unit--, a simple and easy-to-use unit test aid for C++
 // Copyright (C) 2005~2006  Tsong Chong
@@ -506,5 +506,5 @@ testCasePrefix(thisCase, upperSuite, added_)
 
 
 #endif // unitmm_H_opt123
-//@-node:gcross.20090119092241.16:@thin unit--.h
+//@-node:gcross.20090119092241.16:@thin unit--.hpp
 //@-leo

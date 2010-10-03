@@ -19,7 +19,7 @@
 #ifndef header_case_H_opt123
 #define header_case_H_opt123
 
-#include "../include/unit--.h"
+#include "../include/unit--.hpp"
 
 testSuite(HeaderSuite)
 

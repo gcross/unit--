@@ -1,5 +1,5 @@
 //@+leo-ver=4-thin
-//@+node:gcross.20090119092241.4:@thin unit--.cc
+//@+node:gcross.20090119092241.4:@thin unit--.cpp
 //@@language cplusplus
 //@@tabwidth -4
 // unit--, a simple and easy-to-use unit test aid for C++
@@ -23,7 +23,7 @@
 #include <iostream>
 #include <string>
 #include <ctime>
-#include "unit--.h"
+#include "unit--.hpp"
 
 //@+others
 //@+node:gcross.20090119092241.10:namespace unit_minus
@@ -421,5 +421,5 @@ int defaultMain(int argc, char* argv[])
 
 
 
-//@-node:gcross.20090119092241.4:@thin unit--.cc
+//@-node:gcross.20090119092241.4:@thin unit--.cpp
 //@-leo
