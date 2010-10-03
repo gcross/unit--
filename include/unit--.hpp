@@ -173,14 +173,14 @@ namespace unit_minus {
         virtual void check(CaseBase&) =0;
     };
     //@-node:gcross.20090119092241.18:class Runner
-    //@+node:gcross.20090418183921.8:class EnhancedRunner
+    //@+node:gcross.20090418183921.8:class ANSIRunner
     // test all cases, and output error message to std::cout
-    class EnhancedRunner: public Runner {
+    class ANSIRunner: public Runner {
 
         enum {INDENT_SIZE = 4};
 
     private:
-        typedef EnhancedRunner Self;
+        typedef ANSIRunner Self;
         unsigned m_failureCount;
         unsigned m_totalCount;
         unsigned m_indent;
@@ -207,7 +207,7 @@ namespace unit_minus {
         Checker m_checker;
         std::string m_errorFormat;
     public:
-        EnhancedRunner(const std::string& errorFormat)
+        ANSIRunner(const std::string& errorFormat)
             : m_failureCount(0), m_totalCount(0), m_indent(0)
         {
             unit_minus::AssertionChecker::reg(m_checker);
@@ -222,7 +222,8 @@ namespace unit_minus {
         bool ok() const;
         void printSummary() const;
     };
-    //@-node:gcross.20090418183921.8:class EnhancedRunner
+    //@nonl
+    //@-node:gcross.20090418183921.8:class ANSIRunner
     //@-node:gcross.20090418183921.7:Runners
     //@+node:gcross.20090119092241.19:classs TestBase
     //--------------------------------------------------

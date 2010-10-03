@@ -31,12 +31,12 @@ using namespace std;
 
 //@+others
 //@+node:gcross.20090119092241.6:Runners
-//@+node:gcross.20090119092241.7:class EnhancedRunner
+//@+node:gcross.20090119092241.7:class ANSIRunner
 
 
 
 //@+node:gcross.20101003152339.1348:check
-void EnhancedRunner::check(CaseBase& aCase)
+void ANSIRunner::check(CaseBase& aCase)
 {
     try {
         cout << string(INDENT_SIZE * m_indent, ' ');
@@ -70,7 +70,7 @@ void EnhancedRunner::check(CaseBase& aCase)
 //@nonl
 //@-node:gcross.20101003152339.1348:check
 //@+node:gcross.20101003152339.1346:enter
-void EnhancedRunner::enter(SuiteBase& suite) {
+void ANSIRunner::enter(SuiteBase& suite) {
     cout << string(INDENT_SIZE * m_indent, ' ');
     cout << "\033[43m" << suite.caption() << ":\033[0m" << endl;
     ++m_indent;
@@ -78,7 +78,7 @@ void EnhancedRunner::enter(SuiteBase& suite) {
 //@nonl
 //@-node:gcross.20101003152339.1346:enter
 //@+node:gcross.20101003152339.1350:errorMessage
-string EnhancedRunner::errorMessage(FailureInfo& info) const
+string ANSIRunner::errorMessage(FailureInfo& info) const
 {
     ostringstream oo;
     for (string::size_type i = 0; i < m_errorFormat.length(); ++i) {
@@ -99,14 +99,14 @@ string EnhancedRunner::errorMessage(FailureInfo& info) const
 //@nonl
 //@-node:gcross.20101003152339.1350:errorMessage
 //@+node:gcross.20101003152339.1347:exit
-void EnhancedRunner::exit(SuiteBase&) {
+void ANSIRunner::exit(SuiteBase&) {
     --m_indent;
 }
 //@nonl
 //@-node:gcross.20101003152339.1347:exit
 //@+node:gcross.20101003152339.1349:fail
 // a test case failed
-void EnhancedRunner::fail(CaseBase& aCase, FailureInfo& info)
+void ANSIRunner::fail(CaseBase& aCase, FailureInfo& info)
 {
     cout << "\033[1;31m FAIL :-( \033[0m" << endl;
     cout << string(INDENT_SIZE * (m_indent+1), ' ');
@@ -118,14 +118,14 @@ void EnhancedRunner::fail(CaseBase& aCase, FailureInfo& info)
 //@nonl
 //@-node:gcross.20101003152339.1349:fail
 //@+node:gcross.20101003152339.1352:ok
-bool EnhancedRunner::ok() const
+bool ANSIRunner::ok() const
 {
     return 0 == m_failureCount;
 }
 //@nonl
 //@-node:gcross.20101003152339.1352:ok
 //@+node:gcross.20101003152339.1351:pass
-void EnhancedRunner::pass(CaseBase&)
+void ANSIRunner::pass(CaseBase&)
 {
     ++m_totalCount;
     cout << "\033[1;32m PASS :-) \033[0m" << endl;
@@ -133,7 +133,7 @@ void EnhancedRunner::pass(CaseBase&)
 //@nonl
 //@-node:gcross.20101003152339.1351:pass
 //@+node:gcross.20101003152339.1353:printSummary
-void EnhancedRunner::printSummary() const
+void ANSIRunner::printSummary() const
 {
     cout << "\n";
     if (0 == m_failureCount) {
@@ -151,7 +151,7 @@ void EnhancedRunner::printSummary() const
 }
 //@nonl
 //@-node:gcross.20101003152339.1353:printSummary
-//@-node:gcross.20090119092241.7:class EnhancedRunner
+//@-node:gcross.20090119092241.7:class ANSIRunner
 //@+node:gcross.20090119092241.8:class StdRunner
 // test all cases, and output error message to cout
 class StdRunner: public unit_minus::Runner {
@@ -400,7 +400,7 @@ int printHelp(const string& execFile)
 //@+node:gcross.20090119092241.14:runTest
 int runTest(const string& errorFormat)
 {
-    EnhancedRunner runner(errorFormat);
+    ANSIRunner runner(errorFormat);
     time_t t0 = time(0);
     suiteInstance<Root>().run(runner);
     double period = difftime(time(0), t0);
