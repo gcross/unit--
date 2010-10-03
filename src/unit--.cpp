@@ -40,7 +40,7 @@ void ANSIRunner::check(CaseBase& aCase)
 {
     try {
         cout << string(INDENT_SIZE * m_indent, ' ');
-        cout << "\033[1;33m" << aCase.caption() << "... \033[0m" << flush;
+        cout << "\033[1;33m" << withoutUnderscores(aCase.caption()) << "... \033[0m" << flush;
         aCase.test();
         pass(aCase);
         return;
@@ -72,7 +72,7 @@ void ANSIRunner::check(CaseBase& aCase)
 //@+node:gcross.20101003152339.1346:enter
 void ANSIRunner::enter(SuiteBase& suite) {
     cout << string(INDENT_SIZE * m_indent, ' ');
-    cout << "\033[43m" << suite.caption() << ":\033[0m" << endl;
+    cout << "\033[43m" << withoutUnderscores(suite.caption()) << ":\033[0m" << endl;
     ++m_indent;
 }
 //@nonl
@@ -412,6 +412,19 @@ int runTest(const string& errorFormat)
 }
 //@nonl
 //@-node:gcross.20090119092241.14:runTest
+//@+node:gcross.20101003152339.1354:withoutUnderscores
+string withoutUnderscores(const string& in) {
+    string out = in;
+    for(string::iterator c_ptr = out.begin(); c_ptr < out.end(); ++c_ptr) {
+        if(*c_ptr == '_') (*c_ptr) = ' ';
+    }
+    string::iterator c_ptr = --out.end();
+    while (*c_ptr == ' ') --c_ptr;
+    ++c_ptr;
+    out.erase(c_ptr,out.end());
+    return out;
+}
+//@-node:gcross.20101003152339.1354:withoutUnderscores
 //@-node:gcross.20101003152339.1344:Functions
 //@-others
 

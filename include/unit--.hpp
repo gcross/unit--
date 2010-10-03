@@ -382,6 +382,7 @@ namespace unit_minus {
     std::string getFormat(const std::string& style);
     int runTest(const std::string& errorFormat);
     int main(int argc, char* argv[]);
+    std::string withoutUnderscores(const std::string& in);
     //@nonl
     //@-node:gcross.20090119092241.34:miscelleneous
     //@-others
