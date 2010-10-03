@@ -15,10 +15,19 @@
 <v t="gcross.20090414151721.2"><vh>@path include</vh>
 <v t="gcross.20090119092241.16"><vh>@thin unit--.hpp</vh></v>
 </v>
+<v t="gcross.20101003140804.1310"><vh>@path tests</vh>
+<v t="gcross.20101003140804.1341"><vh>@thin examples.cpp</vh></v>
+<v t="gcross.20101003140804.1311"><vh>@thin fake1.cpp</vh></v>
+<v t="gcross.20101003140804.1319"><vh>@thin fake2.cpp</vh></v>
+<v t="gcross.20101003140804.1333"><vh>@thin header_case.hpp</vh></v>
+<v t="gcross.20101003140804.1323"><vh>@thin template.cpp</vh></v>
+<v t="gcross.20101003140804.1347"><vh>@thin utility.cpp</vh></v>
+</v>
 </vnodes>
 <tnodes>
 <t tx="gcross.20090119092241.2"></t>
 <t tx="gcross.20090414151721.1"></t>
 <t tx="gcross.20090414151721.2"></t>
+<t tx="gcross.20101003140804.1310"></t>
 </tnodes>
 </leo_file>
