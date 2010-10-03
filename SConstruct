@@ -40,13 +40,13 @@ env.Alias('install', idir_prefix)
 # Testing:
 #@-at
 #@@c
-test = env.Program('testing/test',[
-    'testing/fake1.cpp',
-    'testing/fake2.cpp',
-    'testing/main.cpp',
-    'testing/template.cpp',
-    'testing/unit--.selftest.cpp',
-    'testing/utility.cpp',
+test = env.Program('tests/test',[
+    'tests/fake1.cpp',
+    'tests/fake2.cpp',
+    'tests/main.cpp',
+    'tests/template.cpp',
+    'tests/unit--.selftest.cpp',
+    'tests/utility.cpp',
     unitmm,
 ])
 env.Alias('test',test)
