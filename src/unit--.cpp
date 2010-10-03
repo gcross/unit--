@@ -25,24 +25,15 @@
 #include <ctime>
 #include "unit--.hpp"
 
-//@+others
-//@+node:gcross.20090119092241.10:namespace unit_minus
 namespace unit_minus {
 
 //@+others
 //@+node:gcross.20090119092241.6:Runners
 //@+node:gcross.20090119092241.7:class EnhancedRunner
-void EnhancedRunner::enter(SuiteBase& suite) {
-    using namespace std;
-    cout << string(INDENT_SIZE * m_indent, ' ');
-    cout << "\033[43m" << suite.caption() << ":\033[0m" << endl;
-    ++m_indent;
-}
 
-void EnhancedRunner::exit(SuiteBase&) {
-    --m_indent;
-}
 
+
+//@+node:gcross.20101003152339.1348:check
 void EnhancedRunner::check(CaseBase& aCase)
 {
     using namespace std;
@@ -75,19 +66,18 @@ void EnhancedRunner::check(CaseBase& aCase)
         return;
     }
 }
-
-// a test case failed
-void EnhancedRunner::fail(CaseBase& aCase, FailureInfo& info)
-{
+//@nonl
+//@-node:gcross.20101003152339.1348:check
+//@+node:gcross.20101003152339.1346:enter
+void EnhancedRunner::enter(SuiteBase& suite) {
     using namespace std;
-    cout << "\033[1;31m FAIL :-( \033[0m" << endl;
-    cout << string(INDENT_SIZE * (m_indent+1), ' ');
-    cout << "\033[1;31m" << errorMessage(info) << "\033[0m" << endl;
-
-    ++m_failureCount;
-    ++m_totalCount;
+    cout << string(INDENT_SIZE * m_indent, ' ');
+    cout << "\033[43m" << suite.caption() << ":\033[0m" << endl;
+    ++m_indent;
 }
-
+//@nonl
+//@-node:gcross.20101003152339.1346:enter
+//@+node:gcross.20101003152339.1350:errorMessage
 std::string EnhancedRunner::errorMessage(FailureInfo& info) const
 {
     using namespace std;
@@ -107,20 +97,45 @@ std::string EnhancedRunner::errorMessage(FailureInfo& info) const
     }
     return oo.str();
 }
+//@nonl
+//@-node:gcross.20101003152339.1350:errorMessage
+//@+node:gcross.20101003152339.1347:exit
+void EnhancedRunner::exit(SuiteBase&) {
+    --m_indent;
+}
+//@nonl
+//@-node:gcross.20101003152339.1347:exit
+//@+node:gcross.20101003152339.1349:fail
+// a test case failed
+void EnhancedRunner::fail(CaseBase& aCase, FailureInfo& info)
+{
+    using namespace std;
+    cout << "\033[1;31m FAIL :-( \033[0m" << endl;
+    cout << string(INDENT_SIZE * (m_indent+1), ' ');
+    cout << "\033[1;31m" << errorMessage(info) << "\033[0m" << endl;
 
-// a test case passed
+    ++m_failureCount;
+    ++m_totalCount;
+}
+//@nonl
+//@-node:gcross.20101003152339.1349:fail
+//@+node:gcross.20101003152339.1352:ok
+bool EnhancedRunner::ok() const
+{
+    return 0 == m_failureCount;
+}
+//@nonl
+//@-node:gcross.20101003152339.1352:ok
+//@+node:gcross.20101003152339.1351:pass
 void EnhancedRunner::pass(CaseBase&)
 {
     using namespace std;
     ++m_totalCount;
     cout << "\033[1;32m PASS :-) \033[0m" << endl;
 }
-
-bool EnhancedRunner::ok() const
-{
-    return 0 == m_failureCount;
-}
-
+//@nonl
+//@-node:gcross.20101003152339.1351:pass
+//@+node:gcross.20101003152339.1353:printSummary
 void EnhancedRunner::printSummary() const
 {
     using namespace std;
@@ -138,6 +153,8 @@ void EnhancedRunner::printSummary() const
     if (m_totalCount > 1) cout << "s";
     cout << endl;
 }
+//@nonl
+//@-node:gcross.20101003152339.1353:printSummary
 //@-node:gcross.20090119092241.7:class EnhancedRunner
 //@+node:gcross.20090119092241.8:class StdRunner
 // test all cases, and output error message to std::cout
@@ -321,6 +338,55 @@ void SuiteBase::run(Runner& log)
 //@nonl
 //@-node:gcross.20090418183921.18:class SuiteBase
 //@-node:gcross.20090418183921.17:Suites
+//@+node:gcross.20101003152339.1344:Functions
+//@+node:gcross.20090119092241.15:defaultMain
+int defaultMain(int argc, char* argv[])
+{
+    using namespace unit_minus;
+    using namespace std;
+
+    if (argc < 2) {
+        return runTest(getFormat("gnu"));
+    }
+
+    if (argc > 2 || string(argv[1]) == "-h" || string(argv[1]) == "--help") {
+        return printHelp(argv[0]);
+    }
+
+    if (string(argv[1]) == "-l" || string(argv[1]) == "--list") {
+        return listCases();
+    }
+
+    return runTest(getFormat(argv[1]));
+}
+//@-node:gcross.20090119092241.15:defaultMain
+//@+node:gcross.20090119092241.13:getFormat
+std::string getFormat(const std::string& style)
+{
+    using namespace std;
+    if ("gnu" == style) return "_f:_l: _m";
+    if ("vc"  == style) return "_f(_l) : error: _m";
+
+    const string format = "format";
+    if (style.length() > format.length()
+        && style.substr(0, format.length()) == format
+    ) {
+        return style.substr(format.length(), string::npos);
+    }
+    return getFormat("gnu");
+}
+//@nonl
+//@-node:gcross.20090119092241.13:getFormat
+//@+node:gcross.20090119092241.12:listCases
+int listCases()
+{
+    using namespace unit_minus;
+    ListBuilder listBuilder;
+    suiteInstance<Root>().run(listBuilder);
+    return 0;
+}
+//@nonl
+//@-node:gcross.20090119092241.12:listCases
 //@+node:gcross.20090119092241.11:printHelp
 int printHelp(const std::string& execFile)
 {
@@ -347,33 +413,6 @@ int printHelp(const std::string& execFile)
 }
 //@nonl
 //@-node:gcross.20090119092241.11:printHelp
-//@+node:gcross.20090119092241.12:listCases
-int listCases()
-{
-    using namespace unit_minus;
-    ListBuilder listBuilder;
-    suiteInstance<Root>().run(listBuilder);
-    return 0;
-}
-//@nonl
-//@-node:gcross.20090119092241.12:listCases
-//@+node:gcross.20090119092241.13:getFormat
-std::string getFormat(const std::string& style)
-{
-    using namespace std;
-    if ("gnu" == style) return "_f:_l: _m";
-    if ("vc"  == style) return "_f(_l) : error: _m";
-
-    const string format = "format";
-    if (style.length() > format.length()
-        && style.substr(0, format.length()) == format
-    ) {
-        return style.substr(format.length(), string::npos);
-    }
-    return getFormat("gnu");
-}
-//@nonl
-//@-node:gcross.20090119092241.13:getFormat
 //@+node:gcross.20090119092241.14:runTest
 int runTest(const std::string& errorFormat)
 {
@@ -392,32 +431,10 @@ int runTest(const std::string& errorFormat)
 }
 //@nonl
 //@-node:gcross.20090119092241.14:runTest
-//@+node:gcross.20090119092241.15:defaultMain
-int defaultMain(int argc, char* argv[])
-{
-    using namespace unit_minus;
-    using namespace std;
-
-    if (argc < 2) {
-        return runTest(getFormat("gnu"));
-    }
-
-    if (argc > 2 || string(argv[1]) == "-h" || string(argv[1]) == "--help") {
-        return printHelp(argv[0]);
-    }
-
-    if (string(argv[1]) == "-l" || string(argv[1]) == "--list") {
-        return listCases();
-    }
-
-    return runTest(getFormat(argv[1]));
-}
-//@-node:gcross.20090119092241.15:defaultMain
+//@-node:gcross.20101003152339.1344:Functions
 //@-others
 
 }
-//@-node:gcross.20090119092241.10:namespace unit_minus
-//@-others
 
 
 
