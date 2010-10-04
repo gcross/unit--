@@ -65,9 +65,7 @@ void getNumber(const std::string& message, unsigned& begin, unsigned& end)
 //@-node:gcross.20101003140804.1355:getNumber
 //@-node:gcross.20101003140804.1352:Utility functions
 //@+node:gcross.20101003140804.1350:Tests
-testSuite(UtilitySuite)
-
-namespace {
+testSuite(UtilitySuite) {
 
 //@+others
 //@+node:gcross.20101003140804.1351:AssertionInfoCase

@@ -38,7 +38,7 @@
 //@-node:gcross.20101003140804.1335:<< Includes >>
 //@nl
 
-testSuite(HeaderSuite)
+testSuite(HeaderSuite) {
 
 class CountLog: public unit_minus::Runner {
     unsigned m_count;
@@ -59,6 +59,8 @@ testCase(OnceCase, HeaderSuite)
     CountLog cl;
     suiteInstance<HeaderSuite>().run(cl);
     assertTrue(equalValueInfo(1u, cl.count()));
+}
+
 }
 
 #endif // header_case_H_opt123

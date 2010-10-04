@@ -48,9 +48,7 @@ static unsigned y()
     return 1;
 }
 
-testSuite(StaticLink1)
-
-namespace {
+testSuite(StaticLink1) {
 
 testCase(IncStatic1, StaticLink1)
 {
@@ -62,6 +60,6 @@ testCase(IncStatic1, StaticLink1)
     assertTrue(1 == y() && "static function has no external linkage");
 }
 
-} // namespace
+} // suite
 //@-node:gcross.20101003140804.1311:@thin fake1.cpp
 //@-leo

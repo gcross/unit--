@@ -41,14 +41,14 @@
 // One defines suites using the testSuite macro:
 //@-at
 //@@c
-testSuite(IllustrationSuite)
+testSuite(IllustrationSuite) {
 
 //@+at
 // To define a new suite that is a child of another suite, one may use the 
 // subSuite macro.
 //@-at
 //@@c
-subSuite(EmptySuite,IllustrationSuite)
+subSuite(EmptySuite,IllustrationSuite) {}
 
 //@+at
 // Test cases are defined as children of test suites.
@@ -156,5 +156,7 @@ testCase(FixtureCase, IllustrationSuite)
     assertAlmostEqual(f.y, f.x * factor, 0.01);
 }
 
+} // end test suite
+//@nonl
 //@-node:gcross.20101003140804.1341:@thin examples.cpp
 //@-leo

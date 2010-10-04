@@ -395,11 +395,14 @@ namespace unit_minus {
 // wrapper code for Suite<>
 // a test suite should be a Suite<>
 #define testSuitePrefix(thisSuite, upperSuite, prefix)                        \
+namespace thisSuite {                                                         \
 class thisSuite: public unit_minus::Suite<thisSuite, upperSuite> {            \
     public: virtual const char* caption() const { return #thisSuite; }        \
 };                                                                            \
 const bool prefix##thisSuite                                                  \
-    = unit_minus::suiteInstance<thisSuite>().addToUpper(); // 3.6.2 foot note 31
+    = unit_minus::suiteInstance<thisSuite>().addToUpper();                    \
+}                                                                             \
+namespace thisSuite
 
 #define subSuite(thisSuite, upperSuite)                                       \
 testSuitePrefix(thisSuite, upperSuite, added_)

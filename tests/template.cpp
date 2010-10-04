@@ -37,7 +37,7 @@
 //@-node:gcross.20101003140804.1324:<< Includes >>
 //@nl
 
-testSuite(TemplateSuite)
+testSuite(TemplateSuite) {
 
 template <typename T>
 void testAlgorithms()
@@ -54,7 +54,6 @@ void testAlgorithms()
     }
 }
 
-namespace {
 testCase(IntCase, TemplateSuite)
 {
     testAlgorithms<int>();
@@ -65,6 +64,6 @@ testCase(UnsignedCase, TemplateSuite)
     testAlgorithms<unsigned>();
 }
 
-} // namespace
+} // suite
 //@-node:gcross.20101003140804.1323:@thin template.cpp
 //@-leo
