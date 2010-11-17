@@ -34,6 +34,7 @@ idir_data   = '$PREFIX/share'
 Export('env idir_prefix idir_lib idir_bin idir_inc idir_data')
 
 env.Install(idir_lib, unitmm)
+env.Install(idir_lib, unitmm_main)
 env.Install(idir_inc, ['include/unit--.hpp'])
 env.Alias('install', idir_prefix)
 
