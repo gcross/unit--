@@ -422,6 +422,9 @@ string withoutUnderscores(const string& in) {
     while (*c_ptr == ' ') --c_ptr;
     ++c_ptr;
     out.erase(c_ptr,out.end());
+    c_ptr = out.begin();
+    while (*c_ptr == ' ') ++c_ptr;
+    out.erase(out.begin(),c_ptr);
     return out;
 }
 //@-node:gcross.20101003152339.1354:withoutUnderscores
