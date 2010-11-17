@@ -418,12 +418,11 @@ string withoutUnderscores(const string& in) {
     for(string::iterator c_ptr = out.begin(); c_ptr < out.end(); ++c_ptr) {
         if(*c_ptr == '_') (*c_ptr) = ' ';
     }
-    string::iterator c_ptr = --out.end();
-    while (*c_ptr == ' ') --c_ptr;
+    string::iterator c_ptr;
+    for(c_ptr = --out.end(); *c_ptr == ' '; --c_ptr) ;
     ++c_ptr;
     out.erase(c_ptr,out.end());
-    c_ptr = out.begin();
-    while (*c_ptr == ' ') ++c_ptr;
+    for(c_ptr = out.begin(); *c_ptr == ' '; ++c_ptr) ;
     out.erase(out.begin(),c_ptr);
     return out;
 }
