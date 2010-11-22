@@ -54,12 +54,12 @@ void testAlgorithms()
     }
 }
 
-testCase(IntCase, TemplateSuite)
+testCase(IntCase)
 {
     testAlgorithms<int>();
 }
 
-testCase(UnsignedCase, TemplateSuite)
+testCase(UnsignedCase)
 {
     testAlgorithms<unsigned>();
 }

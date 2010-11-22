@@ -50,7 +50,7 @@ static unsigned y()
 
 testSuite(StaticLink1) {
 
-testCase(IncStatic2, StaticLink1)
+testCase(IncStatic2)
 {
     using namespace unit_minus;
     ++i;

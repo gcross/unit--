@@ -70,7 +70,7 @@ testSuite(UtilitySuite) {
 //@+others
 //@+node:gcross.20101003140804.1351:AssertionInfoCase
 // test if AssertionInfo transfer info correctly
-testCase(AssertionInfoCase, UtilitySuite)
+testCase(AssertionInfoCase)
 {
     {
         unit_minus::AssertionInfo info(true);
@@ -97,7 +97,7 @@ testCase(AssertionInfoCase, UtilitySuite)
 //@-node:gcross.20101003140804.1351:AssertionInfoCase
 //@+node:gcross.20101003140804.1356:EqualValueCase
 // test if equalValueInfo give correct hint about failure
-testCase(EqualValueCase, UtilitySuite)
+testCase(EqualValueCase)
 {
 
     {
@@ -123,7 +123,7 @@ testCase(EqualValueCase, UtilitySuite)
 //@-node:gcross.20101003140804.1356:EqualValueCase
 //@+node:gcross.20101003140804.1357:CloseValueCase
 // test if closeValueInfo give correct hint about failure
-testCase(CloseValueCase, UtilitySuite)
+testCase(CloseValueCase)
 {
 
     {

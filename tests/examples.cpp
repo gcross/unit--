@@ -48,13 +48,13 @@ testSuite(IllustrationSuite) {
 // subSuite macro.
 //@-at
 //@@c
-subSuite(EmptySuite,IllustrationSuite) {}
+subSuite(EmptySuite) {}
 
 //@+at
 // Test cases are defined as children of test suites.
 //@-at
 //@@c
-testCase(BoolExpression, IllustrationSuite)
+testCase(BoolExpression)
 {
     // The assertTrue macro performas a general assertion;  the test fails if the
     // assertion is true
@@ -77,7 +77,7 @@ testCase(BoolExpression, IllustrationSuite)
 // This is an example of another test attached to the same suite.
 //@-at
 //@@c
-testCase(NoArriveCase, IllustrationSuite)
+testCase(NoArriveCase)
 {
     try {
         // Sometimes we want to test that an exception was thrown, such as in
@@ -100,7 +100,7 @@ testCase(NoArriveCase, IllustrationSuite)
 // an approximate comparison.
 //@-at
 //@@c
-testCase(FloatingPoint, IllustrationSuite)
+testCase(FloatingPoint)
 {
 
     float expectedValue = 1.234f;
@@ -140,7 +140,7 @@ struct MyFixture {
     }
 };
 
-testCase(FixtureCase, IllustrationSuite)
+testCase(FixtureCase)
 {
     // declear a local variable to invoke the constructor for setUp job
     // and (automatically) register the destructor for tearDown

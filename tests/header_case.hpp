@@ -53,7 +53,7 @@ public:
 // this case is implemented in a header file,
 // which would be included by 2 source files
 // the case should be counted only once
-testCase(OnceCase, HeaderSuite)
+testCase(OnceCase)
 {
     using namespace unit_minus;
     CountLog cl;

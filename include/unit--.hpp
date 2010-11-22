@@ -399,18 +399,19 @@ namespace thisSuite {                                                         \
 class thisSuite: public unit_minus::Suite<thisSuite, upperSuite> {            \
     public: virtual const char* caption() const { return #thisSuite; }        \
 };                                                                            \
+typedef thisSuite Parent;                                                     \
 const bool prefix##thisSuite                                                  \
     = unit_minus::suiteInstance<thisSuite>().addToUpper();                    \
 }                                                                             \
 namespace thisSuite
 
-#define subSuite(thisSuite, upperSuite)                                       \
-testSuitePrefix(thisSuite, upperSuite, added_)
+#define subSuite(thisSuite)                                                   \
+testSuitePrefix(thisSuite, Parent, added_)
 
-#define testSuite(thisSuite) subSuite(thisSuite, unit_minus::Root)
 //@nonl
 //@-node:gcross.20090119092241.36:suite macros
 //@+node:gcross.20090119092241.37:test case macros
+#define testSuite(thisSuite) testSuitePrefix(thisSuite, unit_minus::Root, added_)
 // wrapper code for Case<>
 // a test case should be a Case<>
 #define testCasePrefix(thisCase, upperSuite, prefix)                          \
@@ -426,12 +427,12 @@ const bool prefix##thisCase                                                   \
     = unit_minus::caseInstance<thisCase>().addToUpper();                      \
 inline void thisCase::test()
 
-#define testCase(thisCase, upperSuite)                                        \
-testCasePrefix(thisCase, upperSuite, added_)
 //@nonl
 //@-node:gcross.20090119092241.37:test case macros
 //@+node:gcross.20090119092241.38:assertion macros
 //@+node:gcross.20101001160513.1300:assertTrue
+#define testCase(thisCase)                                                    \
+testCasePrefix(thisCase, Parent, added_)
 // test assertion
 // param: expression to test
 // true for pass, false for failure
