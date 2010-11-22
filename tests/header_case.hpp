@@ -1,9 +1,9 @@
-//@+leo-ver=4-thin
-//@+node:gcross.20101003140804.1333:@thin header_case.hpp
+//@+leo-ver=5-thin
+//@+node:gcross.20101003140804.1333: * @thin header_case.hpp
 //@@language cplusplus
 //@@tabwidth -4
-//@<< Licence >>
-//@+node:gcross.20101003140804.1334:<< Licence >>
+//@+<< Licence >>
+//@+node:gcross.20101003140804.1334: ** << Licence >>
 //@+at
 // unit--, a simple and easy-to-use unit test aid for C++
 // Copyright (C) 2005~2006  Tsong Chong
@@ -21,22 +21,17 @@
 // 
 //    You should have received a copy of the GNU General Public License
 //    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  
-// USA
-//@-at
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //@@c
-//@nonl
-//@-node:gcross.20101003140804.1334:<< Licence >>
-//@nl
+//@-<< Licence >>
 
 #ifndef header_case_H_opt123
 #define header_case_H_opt123
 
-//@<< Includes >>
-//@+node:gcross.20101003140804.1335:<< Includes >>
+//@+<< Includes >>
+//@+node:gcross.20101003140804.1335: ** << Includes >>
 #include "../include/unit--.hpp"
-//@-node:gcross.20101003140804.1335:<< Includes >>
-//@nl
+//@-<< Includes >>
 
 testSuite(HeaderSuite) {
 
@@ -64,5 +59,4 @@ testCase(OnceCase)
 }
 
 #endif // header_case_H_opt123
-//@-node:gcross.20101003140804.1333:@thin header_case.hpp
 //@-leo

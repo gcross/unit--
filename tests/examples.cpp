@@ -1,9 +1,9 @@
-//@+leo-ver=4-thin
-//@+node:gcross.20101003140804.1341:@thin examples.cpp
+//@+leo-ver=5-thin
+//@+node:gcross.20101003140804.1341: * @thin examples.cpp
 //@@language cplusplus
 //@@tabwidth -4
-//@<< Licence >>
-//@+node:gcross.20101003140804.1342:<< Licence >>
+//@+<< Licence >>
+//@+node:gcross.20101003140804.1342: ** << Licence >>
 //@+at
 // unit--, a simple and easy-to-use unit test aid for C++
 // Copyright (C) 2005~2006  Tsong Chong
@@ -21,38 +21,29 @@
 // 
 //    You should have received a copy of the GNU General Public License
 //    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  
-// USA
-//@-at
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //@@c
-//@nonl
-//@-node:gcross.20101003140804.1342:<< Licence >>
-//@nl
+//@-<< Licence >>
 
 //@+at
 // This file provides examples of how to use the unit-- test framework.
 // 
 // First, one needs to include the header file:
-//@-at
 //@@c
 #include "../include/unit--.hpp"
 
 //@+at
 // One defines suites using the testSuite macro:
-//@-at
 //@@c
 testSuite(IllustrationSuite) {
 
 //@+at
-// To define a new suite that is a child of another suite, one may use the 
-// subSuite macro.
-//@-at
+// To define a new suite that is a child of another suite, one may use the subSuite macro.
 //@@c
 subSuite(EmptySuite) {}
 
 //@+at
 // Test cases are defined as children of test suites.
-//@-at
 //@@c
 testCase(BoolExpression)
 {
@@ -75,7 +66,6 @@ testCase(BoolExpression)
 
 //@+at
 // This is an example of another test attached to the same suite.
-//@-at
 //@@c
 testCase(NoArriveCase)
 {
@@ -96,9 +86,7 @@ testCase(NoArriveCase)
 }
 
 //@+at
-// For floating point values, one should use the assertClose macro to perform 
-// an approximate comparison.
-//@-at
+// For floating point values, one should use the assertClose macro to perform an approximate comparison.
 //@@c
 testCase(FloatingPoint)
 {
@@ -112,10 +100,7 @@ testCase(FloatingPoint)
 }
 
 //@+at
-// unit-- does not provide special functionality for test fixtures, but 
-// fortunately C++'s semantics make it easy to get this functionality using 
-// native classes, as illustrated in the following example.
-//@-at
+// unit-- does not provide special functionality for test fixtures, but fortunately C++'s semantics make it easy to get this functionality using native classes, as illustrated in the following example.
 //@@c
 struct MyFixture {
     // variables that needed by some test case
@@ -157,6 +142,4 @@ testCase(FixtureCase)
 }
 
 } // end test suite
-//@nonl
-//@-node:gcross.20101003140804.1341:@thin examples.cpp
 //@-leo

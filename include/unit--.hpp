@@ -1,5 +1,5 @@
-//@+leo-ver=4-thin
-//@+node:gcross.20090119092241.16:@thin unit--.hpp
+//@+leo-ver=5-thin
+//@+node:gcross.20090119092241.16: * @thin unit--.hpp
 //@@language C++
 // unit--, a simple and easy-to-use unit test aid for C++
 // Copyright (C) 2005~2006  Tsong Chong
@@ -28,7 +28,7 @@
 #include <vector>
 
 //@+others
-//@+node:gcross.20090119092241.39:class FailureInfo
+//@+node:gcross.20090119092241.39: ** class FailureInfo
 // note failure information and transfer it out
 class FailureInfo {
 private:
@@ -42,17 +42,15 @@ public:
     int line() const { return m_line; }
     const std::string& desc() const { return m_desc; }
 };
-//@nonl
-//@-node:gcross.20090119092241.39:class FailureInfo
-//@+node:gcross.20090119092241.17:namespace unit_minus
+//@+node:gcross.20090119092241.17: ** namespace unit_minus
 namespace unit_minus {
 
     class SuiteBase;
     class CaseBase;
 
-    //@    @+others
-    //@+node:gcross.20090119092241.29:Assertions
-    //@+node:gcross.20090119092241.30:class AssertionInfo
+    //@+others
+    //@+node:gcross.20090119092241.29: *3* Assertions
+    //@+node:gcross.20090119092241.30: *4* class AssertionInfo
     //--------------------------------------------------
     class AssertionInfo {
     private:
@@ -76,9 +74,7 @@ namespace unit_minus {
         const std::string& rawMessage() const { return m_rawMessage; }
         void rawMessage(const std::string& rawMess) { m_rawMessage = rawMess; }
     };
-    //@nonl
-    //@-node:gcross.20090119092241.30:class AssertionInfo
-    //@+node:gcross.20090119092241.31:class AssertionChecker
+    //@+node:gcross.20090119092241.31: *4* class AssertionChecker
     class AssertionChecker;
     // singleton, 7.1.2 - 4
     extern inline AssertionChecker*& currentChecker()
@@ -96,19 +92,15 @@ namespace unit_minus {
         virtual void after() =0;
         virtual void check(const AssertionInfo& info) =0;
     };
-    //@nonl
-    //@-node:gcross.20090119092241.31:class AssertionChecker
-    //@+node:gcross.20090119092241.32:struct CheckerGuard
+    //@+node:gcross.20090119092241.32: *4* struct CheckerGuard
     // make sure before() and after() are called
     struct CheckerGuard {
         CheckerGuard(const char* file, int line)
             { AssertionChecker::get().before(file, line); }
         ~CheckerGuard() { AssertionChecker::get().after(); }
     };
-    //@nonl
-    //@-node:gcross.20090119092241.32:struct CheckerGuard
-    //@+node:gcross.20090119092241.33:checking functions
-    //@+node:gcross.20101001160513.1303:equal value
+    //@+node:gcross.20090119092241.33: *4* checking functions
+    //@+node:gcross.20101001160513.1303: *5* equal value
     template <typename T1, typename T2>
     inline AssertionInfo equalValueInfo(const T1& expected, const T2& actual)
     {
@@ -118,9 +110,7 @@ namespace unit_minus {
         oo << "expected <" << expected << ">, but was <" << actual << ">";
         return AssertionInfo(false, oo.str());
     }
-    //@nonl
-    //@-node:gcross.20101001160513.1303:equal value
-    //@+node:gcross.20101001160513.1306:greater or equal value
+    //@+node:gcross.20101001160513.1306: *5* greater or equal value
     template <typename T1, typename T2>
     inline AssertionInfo greaterOrEqualValueInfo(const T1& x, std::string x_name, const T2& y, std::string y_name)
     {
@@ -130,9 +120,7 @@ namespace unit_minus {
         oo << "have " << x_name << " <" << x << "> < " << y_name << " <" << y << ">";
         return AssertionInfo(false, oo.str());
     }
-    //@nonl
-    //@-node:gcross.20101001160513.1306:greater or equal value
-    //@+node:gcross.20101001160513.1308:less or equal value
+    //@+node:gcross.20101001160513.1308: *5* less or equal value
     template <typename T1, typename T2>
     inline AssertionInfo lessOrEqualValueInfo(const T1& x, std::string x_name, const T2& y, std::string y_name)
     {
@@ -142,9 +130,7 @@ namespace unit_minus {
         oo << "have " << x_name << " <" << x << "> < " << y_name << " <" << y << ">";
         return AssertionInfo(false, oo.str());
     }
-    //@nonl
-    //@-node:gcross.20101001160513.1308:less or equal value
-    //@+node:gcross.20101001160513.1304:close value
+    //@+node:gcross.20101001160513.1304: *5* close value
     template <typename T1, typename T2, typename T3>
     inline AssertionInfo closeValueInfo(const T1& expected, const T2& actual, const T3& precision)
     {
@@ -157,11 +143,8 @@ namespace unit_minus {
         oo << "expected <" << expected << ">, but was <" << actual << ">, which is not close enough with precision <" << precision << ">";
         return AssertionInfo(false, oo.str());
     }
-    //@-node:gcross.20101001160513.1304:close value
-    //@-node:gcross.20090119092241.33:checking functions
-    //@-node:gcross.20090119092241.29:Assertions
-    //@+node:gcross.20090418183921.7:Runners
-    //@+node:gcross.20090119092241.18:class Runner
+    //@+node:gcross.20090418183921.7: *3* Runners
+    //@+node:gcross.20090119092241.18: *4* class Runner
     // log entire test process, providing simple control
     class Runner {
     public:
@@ -172,8 +155,7 @@ namespace unit_minus {
         // check() is called for every test case
         virtual void check(CaseBase&) =0;
     };
-    //@-node:gcross.20090119092241.18:class Runner
-    //@+node:gcross.20090418183921.8:class ANSIRunner
+    //@+node:gcross.20090418183921.8: *4* class ANSIRunner
     // test all cases, and output error message to std::cout
     class ANSIRunner: public Runner {
 
@@ -222,10 +204,7 @@ namespace unit_minus {
         bool ok() const;
         void printSummary() const;
     };
-    //@nonl
-    //@-node:gcross.20090418183921.8:class ANSIRunner
-    //@-node:gcross.20090418183921.7:Runners
-    //@+node:gcross.20090119092241.19:classs TestBase
+    //@+node:gcross.20090119092241.19: *3* classs TestBase
     //--------------------------------------------------
     // base class of tests
     class TestBase {
@@ -238,10 +217,8 @@ namespace unit_minus {
         virtual void run(Runner&) =0;
         virtual const char* caption() const =0;
     };
-    //@nonl
-    //@-node:gcross.20090119092241.19:classs TestBase
-    //@+node:gcross.20090119092241.20:Suites
-    //@+node:gcross.20090119092241.21:class SuiteBase
+    //@+node:gcross.20090119092241.20: *3* Suites
+    //@+node:gcross.20090119092241.21: *4* class SuiteBase
     //--------------------------------------------------
     struct SuiteState {
         bool added;
@@ -276,8 +253,7 @@ namespace unit_minus {
             return true;
         }
     };
-    //@-node:gcross.20090119092241.21:class SuiteBase
-    //@+node:gcross.20090119092241.22:function suiteInstance
+    //@+node:gcross.20090119092241.22: *4* function suiteInstance
     // implement singleton work
     template <typename ThisSuite>
     extern inline ThisSuite& suiteInstance()
@@ -287,9 +263,7 @@ namespace unit_minus {
         s_inst.setState(&state);
         return s_inst;
     }
-    //@nonl
-    //@-node:gcross.20090119092241.22:function suiteInstance
-    //@+node:gcross.20090119092241.23:class Suite
+    //@+node:gcross.20090119092241.23: *4* class Suite
     // abstract class
     template <class ThisSuite, class UpperSuite>
     class Suite: public SuiteBase {
@@ -301,9 +275,7 @@ namespace unit_minus {
             return m_state->added = m_state->added || suiteInstance<UpperSuite>().add(*this);
         }
     };
-    //@nonl
-    //@-node:gcross.20090119092241.23:class Suite
-    //@+node:gcross.20090119092241.24:class Root (suite)
+    //@+node:gcross.20090119092241.24: *4* class Root (suite)
     // the top most test suite
     // every test case should be attached to Root directly or indirectly
     // it's add to upper is not called, OR there will be a INFINITE LOOP
@@ -314,10 +286,8 @@ namespace unit_minus {
             return "all tests";
         }
     };
-    //@-node:gcross.20090119092241.24:class Root (suite)
-    //@-node:gcross.20090119092241.20:Suites
-    //@+node:gcross.20090119092241.25:Test Cases
-    //@+node:gcross.20090119092241.26:class CaseBase
+    //@+node:gcross.20090119092241.25: *3* Test Cases
+    //@+node:gcross.20090119092241.26: *4* class CaseBase
     //--------------------------------------------------
     struct CaseState {
         bool added;
@@ -347,9 +317,7 @@ namespace unit_minus {
             log.check(*this);
         }
     };
-    //@nonl
-    //@-node:gcross.20090119092241.26:class CaseBase
-    //@+node:gcross.20090119092241.27:function caseInstance
+    //@+node:gcross.20090119092241.27: *4* function caseInstance
     // singleton work
     template <typename ThisCase>
     extern inline ThisCase& caseInstance()
@@ -359,9 +327,7 @@ namespace unit_minus {
         s_inst.setState(&state);
         return s_inst;
     }
-    //@nonl
-    //@-node:gcross.20090119092241.27:function caseInstance
-    //@+node:gcross.20090119092241.28:class Case
+    //@+node:gcross.20090119092241.28: *4* class Case
     // abstract class
     // see Suite
     template <class ThisCase, class UpperSuite>
@@ -374,24 +340,19 @@ namespace unit_minus {
             return m_state->added = m_state->added || suiteInstance<UpperSuite>().add(*this);
         }
     };
-    //@-node:gcross.20090119092241.28:class Case
-    //@-node:gcross.20090119092241.25:Test Cases
-    //@+node:gcross.20090119092241.34:miscelleneous
+    //@+node:gcross.20090119092241.34: *3* miscelleneous
     int printHelp(const std::string& execFile);
     int listCases();
     std::string getFormat(const std::string& style);
     int runTest(const std::string& errorFormat);
     int main(int argc, char* argv[]);
     std::string withoutUnderscores(const std::string& in);
-    //@nonl
-    //@-node:gcross.20090119092241.34:miscelleneous
     //@-others
 
 
 } // namespace unit_minus
-//@-node:gcross.20090119092241.17:namespace unit_minus
-//@+node:gcross.20090119092241.35:Macros
-//@+node:gcross.20090119092241.36:suite macros
+//@+node:gcross.20090119092241.35: ** Macros
+//@+node:gcross.20090119092241.36: *3* suite macros
 // wrapper code for Suite<>
 // a test suite should be a Suite<>
 #define testSuitePrefix(thisSuite, upperSuite, prefix)                        \
@@ -408,10 +369,8 @@ namespace thisSuite
 #define subSuite(thisSuite)                                                   \
 testSuitePrefix(thisSuite, Parent, added_)
 
-//@nonl
-//@-node:gcross.20090119092241.36:suite macros
-//@+node:gcross.20090119092241.37:test case macros
 #define testSuite(thisSuite) testSuitePrefix(thisSuite, unit_minus::Root, added_)
+//@+node:gcross.20090119092241.37: *3* test case macros
 // wrapper code for Case<>
 // a test case should be a Case<>
 #define testCasePrefix(thisCase, upperSuite, prefix)                          \
@@ -427,12 +386,10 @@ const bool prefix##thisCase                                                   \
     = unit_minus::caseInstance<thisCase>().addToUpper();                      \
 inline void thisCase::test()
 
-//@nonl
-//@-node:gcross.20090119092241.37:test case macros
-//@+node:gcross.20090119092241.38:assertion macros
-//@+node:gcross.20101001160513.1300:assertTrue
 #define testCase(thisCase)                                                    \
 testCasePrefix(thisCase, Parent, added_)
+//@+node:gcross.20090119092241.38: *3* assertion macros
+//@+node:gcross.20101001160513.1300: *4* assertTrue
 // test assertion
 // param: expression to test
 // true for pass, false for failure
@@ -443,8 +400,7 @@ testCasePrefix(thisCase, Parent, added_)
     opt_info.rawMessage("Assertion failed: <" #opt_expression ">");           \
     unit_minus::AssertionChecker::get().check(opt_info);                      \
 }
-//@-node:gcross.20101001160513.1300:assertTrue
-//@+node:gcross.20101001160513.1301:assertEqual
+//@+node:gcross.20101001160513.1301: *4* assertEqual
 // test assertion
 // param: values whose equality is to be tested
 #define assertEqual(A,B)                                                      \
@@ -453,9 +409,7 @@ testCasePrefix(thisCase, Parent, added_)
     unit_minus::AssertionInfo opt_info = unit_minus::equalValueInfo(A,B);     \
     unit_minus::AssertionChecker::get().check(opt_info);                      \
 }
-//@nonl
-//@-node:gcross.20101001160513.1301:assertEqual
-//@+node:gcross.20101001221615.1310:assertAlmostEqual
+//@+node:gcross.20101001221615.1310: *4* assertAlmostEqual
 // test assertion
 // param: values whose equality is to be tested
 #define assertAlmostEqual(A,B,C)                                                      \
@@ -464,9 +418,7 @@ testCasePrefix(thisCase, Parent, added_)
     unit_minus::AssertionInfo opt_info = unit_minus::closeValueInfo(A,B,C);     \
     unit_minus::AssertionChecker::get().check(opt_info);                      \
 }
-//@nonl
-//@-node:gcross.20101001221615.1310:assertAlmostEqual
-//@+node:gcross.20101001160513.1310:assertGreaterOrEqual
+//@+node:gcross.20101001160513.1310: *4* assertGreaterOrEqual
 // test assertion
 // param: values which are to be compared
 #define assertGreaterOrEqual(A,B)                                                  \
@@ -477,8 +429,7 @@ testCasePrefix(thisCase, Parent, added_)
 }
 
 #define assertGE(A,B) assertGreaterOrEqual(A,B)
-//@-node:gcross.20101001160513.1310:assertGreaterOrEqual
-//@+node:gcross.20101001160513.1312:assertLessOrEqual
+//@+node:gcross.20101001160513.1312: *4* assertLessOrEqual
 // test assertion
 // param: values whose equality is to be tested
 #define assertLessOrEqual(A,B)                                                  \
@@ -489,8 +440,7 @@ testCasePrefix(thisCase, Parent, added_)
 }
 
 #define assertLE(A,B) assertLessOrEqual(A,B)
-//@-node:gcross.20101001160513.1312:assertLessOrEqual
-//@+node:gcross.20101001160513.1302:assertNoArrive
+//@+node:gcross.20101001160513.1302: *4* assertNoArrive
 // test assertion
 // assume failure when executed
 // param: error message
@@ -501,16 +451,10 @@ testCasePrefix(thisCase, Parent, added_)
     opt_info.rawMessage(opt_message);                                         \
     unit_minus::AssertionChecker::get().check(opt_info);                      \
 }
-//@nonl
-//@-node:gcross.20101001160513.1302:assertNoArrive
-//@-node:gcross.20090119092241.38:assertion macros
-//@+node:gcross.20090119092241.40:default main
+//@+node:gcross.20090119092241.40: *3* default main
 #define useDefaultMain int main(int argc, char* argv[]) { unit_minus::main(argc,argv); }
-//@-node:gcross.20090119092241.40:default main
-//@-node:gcross.20090119092241.35:Macros
 //@-others
 
 
 #endif // unitmm_H_opt123
-//@-node:gcross.20090119092241.16:@thin unit--.hpp
 //@-leo

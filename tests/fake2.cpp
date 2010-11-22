@@ -1,9 +1,9 @@
-//@+leo-ver=4-thin
-//@+node:gcross.20101003140804.1319:@thin fake2.cpp
+//@+leo-ver=5-thin
+//@+node:gcross.20101003140804.1319: * @thin fake2.cpp
 //@@language cplusplus
 //@@tabwidth -4
-//@<< Licence >>
-//@+node:gcross.20101003140804.1327:<< Licence >>
+//@+<< Licence >>
+//@+node:gcross.20101003140804.1327: ** << Licence >>
 //@+at
 // unit--, a simple and easy-to-use unit test aid for C++
 // Copyright (C) 2005~2006  Tsong Chong
@@ -21,19 +21,14 @@
 // 
 //    You should have received a copy of the GNU General Public License
 //    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  
-// USA
-//@-at
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //@@c
-//@nonl
-//@-node:gcross.20101003140804.1327:<< Licence >>
-//@nl
-//@<< Includes >>
-//@+node:gcross.20101003140804.1320:<< Includes >>
+//@-<< Licence >>
+//@+<< Includes >>
+//@+node:gcross.20101003140804.1320: ** << Includes >>
 #include "../include/unit--.hpp"
 #include "header_case.hpp"
-//@-node:gcross.20101003140804.1320:<< Includes >>
-//@nl
+//@-<< Includes >>
 
 namespace {
     unsigned i = 0;
@@ -61,5 +56,4 @@ testCase(IncStatic2)
 }
 
 } // suite
-//@-node:gcross.20101003140804.1319:@thin fake2.cpp
 //@-leo

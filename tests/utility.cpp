@@ -1,9 +1,9 @@
-//@+leo-ver=4-thin
-//@+node:gcross.20101003140804.1347:@thin utility.cpp
+//@+leo-ver=5-thin
+//@+node:gcross.20101003140804.1347: * @thin utility.cpp
 //@@language cplusplus
 //@@tabwidth -4
-//@<< Licence >>
-//@+node:gcross.20101003140804.1348:<< Licence >>
+//@+<< Licence >>
+//@+node:gcross.20101003140804.1348: ** << Licence >>
 //@+at
 // unit--, a simple and easy-to-use unit test aid for C++
 // Copyright (C) 2005~2006  Tsong Chong
@@ -21,25 +21,20 @@
 // 
 //    You should have received a copy of the GNU General Public License
 //    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  
-// USA
-//@-at
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //@@c
-//@nonl
-//@-node:gcross.20101003140804.1348:<< Licence >>
-//@nl
-//@<< Includes >>
-//@+node:gcross.20101003140804.1349:<< Includes >>
+//@-<< Licence >>
+//@+<< Includes >>
+//@+node:gcross.20101003140804.1349: ** << Includes >>
 #include <string>
 #include <sstream>
 #include <stdexcept>
 #include "../include/unit--.hpp"
-//@-node:gcross.20101003140804.1349:<< Includes >>
-//@nl
+//@-<< Includes >>
 
 //@+others
-//@+node:gcross.20101003140804.1352:Utility functions
-//@+node:gcross.20101003140804.1354:strTo
+//@+node:gcross.20101003140804.1352: ** Utility functions
+//@+node:gcross.20101003140804.1354: *3* strTo
 template <typename T>
 inline T strTo(const std::string& str)
 {
@@ -48,8 +43,7 @@ inline T strTo(const std::string& str)
     if (ii >> result) return result;
     else throw std::invalid_argument("cannot convert (" + str + ")");
 }
-//@-node:gcross.20101003140804.1354:strTo
-//@+node:gcross.20101003140804.1355:getNumber
+//@+node:gcross.20101003140804.1355: *3* getNumber
 // find sub string enclosed by < and >, starting at "end"
 void getNumber(const std::string& message, unsigned& begin, unsigned& end)
 {
@@ -61,14 +55,11 @@ void getNumber(const std::string& message, unsigned& begin, unsigned& end)
     end = static_cast<unsigned>(message.find(">", begin));
     assertTrue(string::npos != end);
 }
-//@nonl
-//@-node:gcross.20101003140804.1355:getNumber
-//@-node:gcross.20101003140804.1352:Utility functions
-//@+node:gcross.20101003140804.1350:Tests
+//@+node:gcross.20101003140804.1350: ** Tests
 testSuite(UtilitySuite) {
 
 //@+others
-//@+node:gcross.20101003140804.1351:AssertionInfoCase
+//@+node:gcross.20101003140804.1351: *3* AssertionInfoCase
 // test if AssertionInfo transfer info correctly
 testCase(AssertionInfoCase)
 {
@@ -93,9 +84,7 @@ testCase(AssertionInfoCase)
         assertTrue(message == info.message());
     }
 }
-//@nonl
-//@-node:gcross.20101003140804.1351:AssertionInfoCase
-//@+node:gcross.20101003140804.1356:EqualValueCase
+//@+node:gcross.20101003140804.1356: *3* EqualValueCase
 // test if equalValueInfo give correct hint about failure
 testCase(EqualValueCase)
 {
@@ -120,8 +109,7 @@ testCase(EqualValueCase)
         assertTrue(actual == strTo<unsigned>(message.substr(begin, end - begin)));
     }
 }
-//@-node:gcross.20101003140804.1356:EqualValueCase
-//@+node:gcross.20101003140804.1357:CloseValueCase
+//@+node:gcross.20101003140804.1357: *3* CloseValueCase
 // test if closeValueInfo give correct hint about failure
 testCase(CloseValueCase)
 {
@@ -153,13 +141,8 @@ testCase(CloseValueCase)
         assertTrue(unit_minus::closeValueInfo(prec, precFromMessage, 0.001));
     }
 }
-//@nonl
-//@-node:gcross.20101003140804.1357:CloseValueCase
 //@-others
 
 }
-//@nonl
-//@-node:gcross.20101003140804.1350:Tests
 //@-others
-//@-node:gcross.20101003140804.1347:@thin utility.cpp
 //@-leo

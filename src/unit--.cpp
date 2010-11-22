@@ -1,5 +1,5 @@
-//@+leo-ver=4-thin
-//@+node:gcross.20090119092241.4:@thin unit--.cpp
+//@+leo-ver=5-thin
+//@+node:gcross.20090119092241.4: * @thin unit--.cpp
 //@@language cplusplus
 //@@tabwidth -4
 // unit--, a simple and easy-to-use unit test aid for C++
@@ -30,12 +30,12 @@ namespace unit_minus {
 using namespace std;
 
 //@+others
-//@+node:gcross.20090119092241.6:Runners
-//@+node:gcross.20090119092241.7:class ANSIRunner
+//@+node:gcross.20090119092241.6: ** Runners
+//@+node:gcross.20090119092241.7: *3* class ANSIRunner
 
 
 
-//@+node:gcross.20101003152339.1348:check
+//@+node:gcross.20101003152339.1348: *4* check
 void ANSIRunner::check(CaseBase& aCase)
 {
     try {
@@ -67,17 +67,13 @@ void ANSIRunner::check(CaseBase& aCase)
         return;
     }
 }
-//@nonl
-//@-node:gcross.20101003152339.1348:check
-//@+node:gcross.20101003152339.1346:enter
+//@+node:gcross.20101003152339.1346: *4* enter
 void ANSIRunner::enter(SuiteBase& suite) {
     cout << string(INDENT_SIZE * m_indent, ' ');
     cout << "\033[43m" << withoutUnderscores(suite.caption()) << ":\033[0m" << endl;
     ++m_indent;
 }
-//@nonl
-//@-node:gcross.20101003152339.1346:enter
-//@+node:gcross.20101003152339.1350:errorMessage
+//@+node:gcross.20101003152339.1350: *4* errorMessage
 string ANSIRunner::errorMessage(FailureInfo& info) const
 {
     ostringstream oo;
@@ -96,15 +92,11 @@ string ANSIRunner::errorMessage(FailureInfo& info) const
     }
     return oo.str();
 }
-//@nonl
-//@-node:gcross.20101003152339.1350:errorMessage
-//@+node:gcross.20101003152339.1347:exit
+//@+node:gcross.20101003152339.1347: *4* exit
 void ANSIRunner::exit(SuiteBase&) {
     --m_indent;
 }
-//@nonl
-//@-node:gcross.20101003152339.1347:exit
-//@+node:gcross.20101003152339.1349:fail
+//@+node:gcross.20101003152339.1349: *4* fail
 // a test case failed
 void ANSIRunner::fail(CaseBase& aCase, FailureInfo& info)
 {
@@ -115,24 +107,18 @@ void ANSIRunner::fail(CaseBase& aCase, FailureInfo& info)
     ++m_failureCount;
     ++m_totalCount;
 }
-//@nonl
-//@-node:gcross.20101003152339.1349:fail
-//@+node:gcross.20101003152339.1352:ok
+//@+node:gcross.20101003152339.1352: *4* ok
 bool ANSIRunner::ok() const
 {
     return 0 == m_failureCount;
 }
-//@nonl
-//@-node:gcross.20101003152339.1352:ok
-//@+node:gcross.20101003152339.1351:pass
+//@+node:gcross.20101003152339.1351: *4* pass
 void ANSIRunner::pass(CaseBase&)
 {
     ++m_totalCount;
     cout << "\033[1;32m PASS :-) \033[0m" << endl;
 }
-//@nonl
-//@-node:gcross.20101003152339.1351:pass
-//@+node:gcross.20101003152339.1353:printSummary
+//@+node:gcross.20101003152339.1353: *4* printSummary
 void ANSIRunner::printSummary() const
 {
     cout << "\n";
@@ -149,10 +135,7 @@ void ANSIRunner::printSummary() const
     if (m_totalCount > 1) cout << "s";
     cout << endl;
 }
-//@nonl
-//@-node:gcross.20101003152339.1353:printSummary
-//@-node:gcross.20090119092241.7:class ANSIRunner
-//@+node:gcross.20090119092241.8:class StdRunner
+//@+node:gcross.20090119092241.8: *3* class StdRunner
 // test all cases, and output error message to cout
 class StdRunner: public unit_minus::Runner {
 private:
@@ -280,9 +263,7 @@ public:
         cout << endl;
     }
 };
-//@nonl
-//@-node:gcross.20090119092241.8:class StdRunner
-//@+node:gcross.20090119092241.9:class ListBuilder
+//@+node:gcross.20090119092241.9: *3* class ListBuilder
 // list all test cases with a tree structure, but don't do any test
 class ListBuilder: public unit_minus::Runner {
 private:
@@ -309,10 +290,8 @@ public:
     }
 };
 
-//@-node:gcross.20090119092241.9:class ListBuilder
-//@-node:gcross.20090119092241.6:Runners
-//@+node:gcross.20090418183921.17:Suites
-//@+node:gcross.20090418183921.18:class SuiteBase
+//@+node:gcross.20090418183921.17: ** Suites
+//@+node:gcross.20090418183921.18: *3* class SuiteBase
 void SuiteBase::run(Runner& log)
 {
     log.enter(*this);
@@ -325,11 +304,8 @@ void SuiteBase::run(Runner& log)
     }
     log.exit(*this);
 }
-//@nonl
-//@-node:gcross.20090418183921.18:class SuiteBase
-//@-node:gcross.20090418183921.17:Suites
-//@+node:gcross.20101003152339.1344:Functions
-//@+node:gcross.20090119092241.13:getFormat
+//@+node:gcross.20101003152339.1344: ** Functions
+//@+node:gcross.20090119092241.13: *3* getFormat
 string getFormat(const string& style)
 {
     if ("gnu" == style) return "_f:_l: _m";
@@ -343,18 +319,14 @@ string getFormat(const string& style)
     }
     return getFormat("gnu");
 }
-//@nonl
-//@-node:gcross.20090119092241.13:getFormat
-//@+node:gcross.20090119092241.12:listCases
+//@+node:gcross.20090119092241.12: *3* listCases
 int listCases()
 {
     ListBuilder listBuilder;
     suiteInstance<Root>().run(listBuilder);
     return 0;
 }
-//@nonl
-//@-node:gcross.20090119092241.12:listCases
-//@+node:gcross.20090119092241.15:main
+//@+node:gcross.20090119092241.15: *3* main
 int main(int argc, char* argv[])
 {
     if (argc < 2) {
@@ -371,8 +343,7 @@ int main(int argc, char* argv[])
 
     return runTest(getFormat(argv[1]));
 }
-//@-node:gcross.20090119092241.15:main
-//@+node:gcross.20090119092241.11:printHelp
+//@+node:gcross.20090119092241.11: *3* printHelp
 int printHelp(const string& execFile)
 {
     cout
@@ -395,9 +366,7 @@ int printHelp(const string& execFile)
         << flush;
     return 0;
 }
-//@nonl
-//@-node:gcross.20090119092241.11:printHelp
-//@+node:gcross.20090119092241.14:runTest
+//@+node:gcross.20090119092241.14: *3* runTest
 int runTest(const string& errorFormat)
 {
     ANSIRunner runner(errorFormat);
@@ -410,9 +379,7 @@ int runTest(const string& errorFormat)
     cout <<"." << endl;
     return runner.ok() ? 0 : 1;
 }
-//@nonl
-//@-node:gcross.20090119092241.14:runTest
-//@+node:gcross.20101003152339.1354:withoutUnderscores
+//@+node:gcross.20101003152339.1354: *3* withoutUnderscores
 string withoutUnderscores(const string& in) {
     string out = in;
     for(string::iterator c_ptr = out.begin(); c_ptr < out.end(); ++c_ptr) {
@@ -426,13 +393,10 @@ string withoutUnderscores(const string& in) {
     out.erase(out.begin(),c_ptr);
     return out;
 }
-//@-node:gcross.20101003152339.1354:withoutUnderscores
-//@-node:gcross.20101003152339.1344:Functions
 //@-others
 
 }
 
 
 
-//@-node:gcross.20090119092241.4:@thin unit--.cpp
 //@-leo

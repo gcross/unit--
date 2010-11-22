@@ -1,9 +1,9 @@
-//@+leo-ver=4-thin
-//@+node:gcross.20101003140804.1323:@thin template.cpp
+//@+leo-ver=5-thin
+//@+node:gcross.20101003140804.1323: * @thin template.cpp
 //@@language cplusplus
 //@@tabwidth -4
-//@<< Licence >>
-//@+node:gcross.20101003140804.1325:<< Licence >>
+//@+<< Licence >>
+//@+node:gcross.20101003140804.1325: ** << Licence >>
 //@+at
 // unit--, a simple and easy-to-use unit test aid for C++
 // Copyright (C) 2005~2006  Tsong Chong
@@ -21,21 +21,16 @@
 // 
 //    You should have received a copy of the GNU General Public License
 //    along with this program; if not, write to the Free Software
-//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  
-// USA
-//@-at
+//    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //@@c
-//@nonl
-//@-node:gcross.20101003140804.1325:<< Licence >>
-//@nl
-//@<< Includes >>
-//@+node:gcross.20101003140804.1324:<< Includes >>
+//@-<< Licence >>
+//@+<< Includes >>
+//@+node:gcross.20101003140804.1324: ** << Includes >>
 #include <vector>
 #include <numeric>
 #include <algorithm>
 #include "../include/unit--.hpp"
-//@-node:gcross.20101003140804.1324:<< Includes >>
-//@nl
+//@-<< Includes >>
 
 testSuite(TemplateSuite) {
 
@@ -65,5 +60,4 @@ testCase(UnsignedCase)
 }
 
 } // suite
-//@-node:gcross.20101003140804.1323:@thin template.cpp
 //@-leo

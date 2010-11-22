@@ -1,11 +1,10 @@
-#@+leo-ver=4-thin
-#@+node:gcross.20090221223144.2:@thin SConstruct
+#@+leo-ver=5-thin
+#@+node:gcross.20090221223144.2: * @thin SConstruct
 #@@language Python
 env = Environment()
 
 #@+at
 # Get our configuration options:
-#@-at
 #@@c
 opts = Variables('unit--.conf') # Change wm to the name of your app
 opts.Add(PathVariable('PREFIX', 'Directory to install under', '/usr/local', PathVariable.PathIsDir))
@@ -16,7 +15,6 @@ Help(opts.GenerateHelpText(env))
 
 #@+at
 # Build the program:
-#@-at
 #@@c
 unitmm = env.Library(target = 'lib/unit--', source = ['src/unit--.cpp'], CPPPATH='include')
 unitmm_main = env.Library(target = 'lib/unit--main', source = ['src/unit--main.cpp'], CPPPATH='include')
@@ -24,7 +22,6 @@ Default(unitmm,unitmm_main)
 
 #@+at
 # Perform installation:
-#@-at
 #@@c
 idir_prefix = '$PREFIX'
 idir_lib    = '$PREFIX/lib'
@@ -40,7 +37,6 @@ env.Alias('install', idir_prefix)
 
 #@+at
 # Testing:
-#@-at
 #@@c
 test = env.Program('tests/test',[
     'tests/examples.cpp',
@@ -52,5 +48,4 @@ test = env.Program('tests/test',[
     unitmm_main,
 ])
 env.Alias('test',test)
-#@-node:gcross.20090221223144.2:@thin SConstruct
 #@-leo
